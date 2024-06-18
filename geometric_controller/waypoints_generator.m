@@ -2,8 +2,8 @@ dt = 0.1;
 t_end = 30;
 Ts=0.001; % SAMPLING TIME
 
-q_0 = [1 1 -4]';
-q_f = [4 4 -6]';
+q_0 = [1 1 -1]';
+q_f = [10 10 -10]';
 q_obs_1 = [4.5; 5; -5];
 q_obs_2 = [5; 4.5; -5];
 q_obs_3 = [5; 4.5; -4];
@@ -11,7 +11,7 @@ q_obs_4 = [7; 7; -7];
 q_obstacles = [q_obs_1 q_obs_2 q_obs_3 q_obs_4];
 
 d0 = 2.5;           % coeff influenza
-k_att = 0.4;
+k_att = 0.8;
 k_rep = 0.8;
 k_v = 0.8;
 k_a = 1;
@@ -80,23 +80,11 @@ end
 
 %% TRAJECTORY
 
-t_interval = linspace(0,t_end,size(traj,2));
-
-% Definisci le velocità iniziali e finali per ciascun waypoint
-initialVelocity = ones(2,size(traj,2));
-finalVelocity = ones(2,size(traj,2));
-bound_Velocity = [initialVelocity; finalVelocity];
-bound_Velocity(:,1) = 0;
-bound_Velocity(:,end) = 0;
-
-acc = 10*ones(1,size(traj,2));
-bound_Acceleration = [acc; acc; acc; acc];
-bound_Acceleration(:,1) = 0;
-bound_Acceleration(:,end) = 0;
+%t_interval = linspace(0,t_end,size(traj,2));
+t_interval = 0:size(traj,2)-1;
 
 t = 0:Ts:t_end;
-% [p_d, dot_p_d, ddot_p_d, pp] = quinticpolytraj(traj, t_interval, t, 'VelocityBoundaryCondition', bound_Velocity,'AccelerationBoundaryCondition',bound_Acceleration);
-[p_d, dot_p_d, ddot_p_d, pp, tPoints,tSamples] = minjerkpolytraj(traj, t_interval, 30001);  %,'AccelerationBoundaryCondition',bound_Acceleration);
+[p_d, dot_p_d, ddot_p_d, pp, tPoints,tSamples] = minjerkpolytraj(traj, t_interval, length(t));
 
 %% data for Simulink
 pos_0 = q_0';
@@ -109,8 +97,9 @@ psi_d = p_d(4,:);
 dot_psi_d = dot_p_d(4,:); 
 ddot_psi_d = ddot_p_d(4,:);
 
+
 %% PLOTS
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+figure('Renderer', 'painters', 'Position', [1,71,1440,726])
 title("PLANNER")
 subplot(2,2,1); 
 legend_vec = {'$$x$$', '$$y$$', '$$z$$'};
@@ -123,4 +112,8 @@ singleplot(t,dot_csi_d,'time[sec]','velocity\ [m/s]',"Desired Velocity",legend_v
 subplot(2,2,3); 
 legend_vec = {'$$\ddot{x}$$','$$\ddot{y}$$','$$\ddot{z}$$'};
 singleplot(t,ddot_csi_d,'time[sec]','$$acceleration\ [m/s^2]$$',"Desired Acceleration",legend_vec,'commThrust.pdf');
+
+subplot(2,2,4); 
+legend_vec = {'$$\psi_d$$','$$\dot{\psi}_d$$','$$\ddot{\psi}_d$$'};
+singleplot(t,[psi_d; dot_psi_d;ddot_psi_d],'time[sec]','$$rotation\ [m/s^2]$$',"Desired Rotation",legend_vec,'commThrust.pdf');
 
