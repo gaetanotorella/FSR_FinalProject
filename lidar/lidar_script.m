@@ -25,20 +25,20 @@ kw = diag([10 10 10]);
 % kw = diag([50 50 50]);
 
 %% ARTIFICIAL POTENTIAL PARAM
-k_att = 0.5;
-k_rep = 0.5;
-d0 = 2.0;
+k_att = 2;
+k_rep = 6;
+d0 = 3.0;
 
 %% SCENARIO
 % Initialize the scenario 
 scene = uavScenario(UpdateRate=1/Ts,ReferenceLocation=[0 0 0]);
 
 % Create a ground for visualization
-addMesh(scene,"polygon",{[-15 -15; 15 -15; 15 15; -15 15] [-0.5 0]},[0.3 0.3 0.3]);
+addMesh(scene,"polygon",{[-5 -5; 10 -5; 10 10; -5 10] [-0.5 0]},[0.3 0.3 0.3]);
 
 % Add cylinder meshes to scan with lidar sensor
 %addMesh(scene,"cylinder",{[-5 5 0.5],[0 10]},[1 0 0]);
-addMesh(scene,"cylinder",{[3.5 5.5 0.01],[0 10]},[0 1 0]);
+addMesh(scene,"cylinder",{[3.5 5.5 0.1],[0 10]},[0 1 0]);
 %addMesh(scene,"cylinder",{[5 -5 0.5],[0 10]},[0 0 1]);
 % (scenario, "oggetto", {[x y radius], [boh altezza], [colore]}
 
@@ -59,11 +59,12 @@ updateMesh(platform,"quadrotor",{2},[0 0 0],eul2tform([0 0 pi]));
 
 % Add Lidar sensor to UAV
 LidarModel = uavLidarPointCloudGenerator("UpdateRate",1/Ts);
-uavSensor("Lidar",platform,LidarModel,"MountingLocation",[0,0,0],"MountingAngles",[0 0 0]);
+uavSensor("Lidar",platform,LidarModel,"MountingLocation",[0,0,-1],"MountingAngles",[0 0 0]);
 
 
 open_system("UAV_Model.slx")
 out = sim("UAV_Model.slx",'StopTime','30');
+
 %% VISUAL
 if video == 1
     figure()
