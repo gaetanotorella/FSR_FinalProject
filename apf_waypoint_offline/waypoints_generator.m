@@ -24,7 +24,7 @@ plot_F = [];
 plot_F_rep = [];
 plot_F_a = [];
 
-for i = 1:dt:t_end
+for k = 0:dt:t_end
 
     e_pos = q_f - q;
 
@@ -51,7 +51,11 @@ for i = 1:dt:t_end
         end
     end
 
-    F = F_a + F_rep;
+    F_tot = F_a + F_rep;
+
+    alpha = calculate_alpha(k);
+    F = exp_mov_average(F_tot,alpha);
+    
 
     plot_F_a = [plot_F_a F_a];
     plot_F_rep = [plot_F_rep F_rep];
@@ -68,12 +72,15 @@ traj = newtraj;
 
 %% TRAJECTORY
 
-t_interval = 0:size(traj,2)-1;
+t_interval = 0:dt:t_end+dt;
 
 t = 0:Ts:t_end;
+
 [p_d, dot_p_d, ddot_p_d, pp, tPoints,tSamples] = minjerkpolytraj(traj, t_interval, length(t));
 
+
 %% data for Simulink
+
 pos_0 = q_0';
 lin_vel_0 = [0 0 0];
 w_bb_0 = [0 0 0];
@@ -87,11 +94,14 @@ ddot_psi_d = ddot_p_d(4,:);
 
 %% PLOT 3D
 
-figure()
+fig_traj = figure('Renderer', 'painters', 'Position', [1,72,727,725]);
+removeToolbarExplorationButtons(fig_traj)
 plot3(traj(1,:),traj(2,:),-traj(3,:))
+xlabel("East [m]")
+ylabel("North [m]")
+zlabel("Up [m]")
 axis equal
-view([-43.396800702791758 20.232570274887394])
-
+view([-18.085159810409245 19.491063829787073])
 hold on
 grid on
 plot3(q_0(1),q_0(2),-q_0(3),"o",'Color',"b",'MarkerSize',10)
@@ -101,6 +111,7 @@ for i = 1:size(q_obstacles, 2)
 plot3(q_obstacles(1,i),q_obstacles(2,i),-q_obstacles(3,i),"*",'Color',"r",'MarkerSize',10)
 end
 axis on
+exportgraphics(fig_traj, "traj3d_d.pdf");
 
 
 %% PDF

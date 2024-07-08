@@ -16,6 +16,12 @@ Kv = diag([4.7 4.7 4.7]);
 Kr = diag([2 2.3 0.15]);
 Kw = diag([0.4 0.52 0.18]);
 
+% Kp = diag([70 70 70]);
+% Kv = diag([6 6 6]);
+% Kr = diag([10 10 1.5]);
+% Kw = diag([4 5.2 1.8]);
+
+
 %% CONFIGURATION
 
 waypoints_generator;
@@ -27,7 +33,7 @@ scenario_generator;
 out = sim("apf_waypoint_offline.slx",'StopTime','40');
 
 
-%% PLOT PDF
+%%% PLOT PDF
 time = linspace(0,t_end,length(out.err_p.Data));
 legend_vec = {'$$err_{x}$$','$$err_{y}$$','$$err_{z}$$'};
 singleplot(time,out.err_p.Data,'time[sec]','position[m]',"Position error",legend_vec,'errPos.pdf');
