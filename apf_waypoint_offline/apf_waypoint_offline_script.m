@@ -16,10 +16,10 @@ Kv = diag([4.7 4.7 4.7]);
 Kr = diag([2 2.3 0.15]);
 Kw = diag([0.4 0.52 0.18]);
 
-% Kp = diag([70 70 70]);
-% Kv = diag([6 6 6]);
-% Kr = diag([10 10 1.5]);
-% Kw = diag([4 5.2 1.8]);
+Kp = diag([70 70 70]);
+Kv = diag([6 6 6]);
+Kr = diag([10 10 1.5]);
+Kw = diag([4 5.2 1.8]);
 
 
 %% CONFIGURATION
