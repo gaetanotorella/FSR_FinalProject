@@ -17,6 +17,11 @@ kv = diag([4.7 4.7 4.7]);
 kr = diag([2 2.3 0.15]);
 kw = diag([0.4 0.52 0.18]);
 
+Kp = diag([70 70 70]);
+Kv = diag([6 6 6]);
+Kr = diag([10 10 1.5]);
+Kw = diag([4 5.2 1.8]);
+
 %% ARTIFICIAL POTENTIAL PARAM
 
 d0 = 2.5;           % coeff influenza
@@ -30,7 +35,8 @@ obs_1 = [4.5 5 0.3 0 10];
 obs_2 = [2 2 0.2 0 3];
 
 q_obstacles = [obs_points_gen(obs_1); obs_points_gen(obs_2)];
-
+q_obs1 = obs_points_gen(obs_1);
+q_obs2 = obs_points_gen(obs_2);
 scenario_generator;
 
 
@@ -38,11 +44,12 @@ scenario_generator;
 close all
 open_system("apf_offline.slx")
 out = sim("apf_offline.slx",'StopTime','40');
-
-legend_vec = {'$$x$$', '$$y$$', '$$z$$'};
-singleplot(time,out.F,'time[sec]','$$Force$$',"Total Force",legend_vec,'f_tot.pdf');
-legend_vec = {'$$\tau_{x}$$','$$\tau_{y}$$','$$\tau_{z}$$'};
-singleplot(time,out.tau_b.Data,'time[sec]','toruqe\ [Nm]',"Commanded Torque",legend_vec,'commTau.pdf');
+%% PLOT PDF
+% time = linspace(0,t_end,length(out.err_p.Data));
+% legend_vec = {'$$x$$', '$$y$$', '$$z$$'};
+% singleplot(time,out.F,'time[sec]','$$Force$$',"Total Force",legend_vec,'f_tot.pdf');
+% legend_vec = {'$$\tau_{x}$$','$$\tau_{y}$$','$$\tau_{z}$$'};
+% singleplot(time,out.tau_b.Data,'time[sec]','toruqe\ [Nm]',"Commanded Torque",legend_vec,'commTau.pdf');
 
 
 %% PLOT PDF
@@ -85,5 +92,5 @@ legend_vec = {'$$\dot{x}$$','$$\dot{y}$$','$$\dot{z}$$'};
 singleplot(time,out.vel_d,'time[sec]','velocity\ [m/s]',"Desired Velocity",legend_vec,'vel_d.pdf');
 
 legend_vec = {'$$\ddot{x}$$','$$\ddot{y}$$','$$\ddot{z}$$'};
-singleplot(time,out.acc_d(1:3,:),'time[sec]','$$acceleration\ [m/s^2]$$',"Desired Acceleration",legend_vec,'acc_d.pdf');
+singleplot(time,out.acc_d,'time[sec]','$$acceleration\ [m/s^2]$$',"Desired Acceleration",legend_vec,'acc_d.pdf');
 
