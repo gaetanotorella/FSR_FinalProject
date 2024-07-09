@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-bagfile = 'geom_controller.bag';
+bagfile = 'geom_controller_all.bag';
 bag = rosbag(bagfile);
 disp(bag.AvailableTopics);
 
@@ -112,29 +112,28 @@ F_rep = timeseries(bag_F_rep,'X','Y','Z');
 
 
 %% PLOT 
-legend_vec_xyz = {'x', 'y', 'z'};
-legend_vec_rpy = {'roll', 'pitch', 'yaw'};
-legend_vec_quat = {'x', 'y', 'z', 'w'};
-
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
-subplot(3,1,1)
-q.Data = -q.Data;
-plot_ts(q,'time [sec]','position[m]',"Desired Position",legend_vec_xyz);
-subplot(3,1,2)
-plot_ts(dot_q,'time [sec]','velocity[m/s]',"Desried Velocity",legend_vec_xyz);
-subplot(3,1,3)
-plot_ts(ddot_q,'time [sec]','acceleration[m/s^2]',"Desried Acceleration",legend_vec_xyz);
-
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
-subplot(2,2,1)
-plot_ts(pos,'time [sec]','position [m]',"Position",legend_vec_xyz);
-subplot(2,2,2)
-plot_ts(ori,'time [sec]','quaternion',"Orientation",legend_vec_quat);
-subplot(2,2,3)
-plot_ts(vel,'time [sec]','velocity[m/s]',"Linear Velocity",legend_vec_xyz);
-subplot(2,2,4)
-plot_ts(ang_vel,'time [sec]','quaternion',"Angular Velocity",legend_vec_quat);
-
+% legend_vec_xyz = {'x', 'y', 'z'};
+% legend_vec_rpy = {'roll', 'pitch', 'yaw'};
+% legend_vec_quat = {'x', 'y', 'z', 'w'};
+% 
+% figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+% subplot(3,1,1)
+% plot_ts(q,'time [sec]','position[m]',"Desired Position",legend_vec_xyz);
+% subplot(3,1,2)
+% plot_ts(dot_q,'time [sec]','velocity[m/s]',"Desried Velocity",legend_vec_xyz);
+% subplot(3,1,3)
+% plot_ts(ddot_q,'time [sec]','acceleration[m/s^2]',"Desried Acceleration",legend_vec_xyz);
+% 
+% figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+% subplot(2,2,1)
+% plot_ts(pos,'time [sec]','position [m]',"Position",legend_vec_xyz);
+% subplot(2,2,2)
+% plot_ts(ori,'time [sec]','quaternion',"Orientation",legend_vec_quat);
+% subplot(2,2,3)
+% plot_ts(vel,'time [sec]','velocity[m/s]',"Linear Velocity",legend_vec_xyz);
+% subplot(2,2,4)
+% plot_ts(ang_vel,'time [sec]','quaternion',"Angular Velocity",legend_vec_quat);
+% 
 % figure('Renderer', 'painters', 'Position', [1 73 1440 724])
 % subplot(2,2,1)
 % plot_ts(imu_acc,'time [sec]','position [m]',"IMU ACC",legend_vec_xyz);
@@ -142,17 +141,17 @@ plot_ts(ang_vel,'time [sec]','quaternion',"Angular Velocity",legend_vec_quat);
 % plot_ts(imu_ori,'time [sec]','quaternion',"IMU Orientation",legend_vec_quat);
 % subplot(2,2,3)
 % plot_ts(imu_ang_vel,'time [sec]','quaternion',"IMU Angular Velocity",legend_vec_quat);
-
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
-subplot(2,2,1)
-plot_ts(err_p,'time [sec]','error pos [m]',"Error P",legend_vec_xyz);
-subplot(2,2,2)
-plot_ts(err_v,'time [sec]','error vel [m/s]',"Error V",legend_vec_xyz);
-subplot(2,2,3)
-plot_ts(err_R,'time [sec]','error rot [rad]',"Error R",legend_vec_xyz);
-subplot(2,2,4)
-plot_ts(err_W,'time [sec]','error ang vel [rad/s]',"Error W ",legend_vec_xyz);
-
+% 
+% figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+% subplot(2,2,1)
+% plot_ts(err_p,'time [sec]','error pos [m]',"Error P",legend_vec_xyz);
+% subplot(2,2,2)
+% plot_ts(err_v,'time [sec]','error vel [m/s]',"Error V",legend_vec_xyz);
+% subplot(2,2,3)
+% plot_ts(err_R,'time [sec]','error rot [rad]',"Error R",legend_vec_xyz);
+% subplot(2,2,4)
+% plot_ts(err_W,'time [sec]','error ang vel [rad/s]',"Error W ",legend_vec_xyz);
+% 
 % figure('Renderer', 'painters', 'Position', [1 73 1440 724])
 % subplot(3,1,1)
 % plot_ts(omega_bb,'time [sec]','omega_bb[rad/s]',"omega_bb",legend_vec_xyz);
@@ -160,7 +159,7 @@ plot_ts(err_W,'time [sec]','error ang vel [rad/s]',"Error W ",legend_vec_xyz);
 % plot_ts(omega_bb_des,'time [sec]','omega_bb_des[rad/s]',"omega_bb_des",legend_vec_xyz);
 % subplot(3,1,3)
 % plot_ts(dot_omega_bb_des,'time [sec]','dot_omega_bb_des[rad/s^2]',"dot_omega_bb_des",legend_vec_xyz);
-
+% 
 % figure('Renderer', 'painters', 'Position', [1 73 1440 724])
 % subplot(3,1,1)
 % plot_ts(Rb_des,'time [sec]','Rb_des[rad]',"Rb_des",legend_vec_quat);
@@ -168,25 +167,25 @@ plot_ts(err_W,'time [sec]','error ang vel [rad/s]',"Error W ",legend_vec_xyz);
 % plot_ts(dot_Rb_des,'time [sec]','dot_Rb_des[rad/s]',"dot_Rb_des",legend_vec_quat);
 % subplot(3,1,3)
 % plot_ts(zb_des,'time [sec]','vector',"Zb_des",legend_vec_xyz)
-
-
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
-subplot(2,2,1)
-plot_ts(tau_b, 'time [sec]', 'command torque', 'tau_b', legend_vec_rpy)
-subplot(2,2,2)
-plot_ts(u_T, 'time [sec]', 'command thrust', 'u_T', 'u_T')
-subplot(2,2,3)
-plot_ts(read_speed,'time [sec]','motor speed [rpm]', 'Read Motor Speed', {'m0','m1','m2','m3'});
-subplot(2,2,4)
-plot_ts(comm_speed,'time [sec]','motor speed [rpm]', 'Commanded Motor Speed', {'m0','m1','m2','m3'});
-
-
-figure('Renderer', 'painters', 'Position', [1 73 1440 724])
-subplot(2,2,1)
-plot_ts(F,'time [sec]','F_tot[N]',"APF Total Force",legend_vec_xyz)
-subplot(2,2,2)
-plot_ts(F_rep,'time [sec]','F_tot[N]',"APF Repulsive Force",legend_vec_xyz)
-subplot(2,2,3)
+% 
+% 
+% figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+% subplot(2,2,1)
+% plot_ts(tau_b, 'time [sec]', 'command torque', 'tau_b', legend_vec_rpy)
+% subplot(2,2,2)
+% plot_ts(u_T, 'time [sec]', 'command thrust', 'u_T', 'u_T')
+% subplot(2,2,3)
+% plot_ts(read_speed,'time [sec]','motor speed [rpm]', 'Read Motor Speed', {'m0','m1','m2','m3'});
+% subplot(2,2,4)
+% plot_ts(comm_speed,'time [sec]','motor speed [rpm]', 'Commanded Motor Speed', {'m0','m1','m2','m3'});
+% 
+% 
+% figure('Renderer', 'painters', 'Position', [1 73 1440 724])
+% subplot(2,2,1)
+% plot_ts(F,'time [sec]','F_tot[N]',"APF Total Force",legend_vec_xyz)
+% subplot(2,2,2)
+% plot_ts(F_rep,'time [sec]','F_tot[N]',"APF Repulsive Force",legend_vec_xyz)
+% subplot(2,2,3)
 % plot_ts(dist3d,'time [sec]','distance[m]',"APF Obstacle distance",legend_vec_xyz)
 % subplot(2,2,4)
 % plot_ts(psi_des,'time [sec]','distance[m]',"APF Obstacle distance",legend_vec_xyz)
@@ -199,7 +198,17 @@ subplot(2,2,3)
 % axis equal
 % view([-43.396800702791758 20.232570274887394])
 
+
+%% change PDF
+
+q.Data = -q.Data;
+dot_q.Data = -dot_q.Data;
+ddot_q.Data = -ddot_q.Data;
+F.Data = -F.Data;
+
+
 %% PLOT PDF
+
 legend_vec_xyz = {'$$x$$', '$$y$$', '$$z$$'};
 legend_vec_rpy = {'$$roll$$', '$$pitch$$', '$$yaw$$'};
 legend_vec_quat = {'$$x$$', '$$y$$', '$$z$$', '$$w$$'};
@@ -226,5 +235,10 @@ pdf_ts(comm_speed,'$$time [sec]$$','$$motor\ speed\ [rpm]$$', 'Commanded Motor S
 
 pdf_ts(F,       '$$time [sec]$$','$$F_{tot}$$',"APF Total Force",legend_vec_xyz,'f_tot.pdf')
 pdf_ts(F_rep,   '$$time [sec]$$','$$F_{rep}$$',"APF Repulsive Force",legend_vec_xyz,'f_rep.pdf')
+
+%% inutile
+% F_a = F_rep;
+% F_a.Data = F.Data(1:length(F_rep.Data),:) - F_rep.Data;
+% pdf_ts(F_a,   '$$time [sec]$$','$$F_{a}$$',"APF Attractive Force",legend_vec_xyz,'f_a.pdf')
 
 

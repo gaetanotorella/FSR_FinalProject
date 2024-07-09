@@ -12,7 +12,7 @@ function h = pdf_ts(y, x_label, y_label, title_str, legend_vec, pdf_name)
     x = y.Time;
     plot(x,y.Data, 'Linewidth', lw);
     xlim([x(1) x(end)])
-    xlim([371.0520 423.9380])
+    xlim([347.772 405])
 
     xlabel(x_label)
     ylabel(y_label)
