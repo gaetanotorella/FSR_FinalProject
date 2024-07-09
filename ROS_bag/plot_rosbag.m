@@ -203,27 +203,28 @@ subplot(2,2,3)
 legend_vec_xyz = {'$$x$$', '$$y$$', '$$z$$'};
 legend_vec_rpy = {'$$roll$$', '$$pitch$$', '$$yaw$$'};
 legend_vec_quat = {'$$x$$', '$$y$$', '$$z$$', '$$w$$'};
+legend_vec_motor =  {'$$\omega_1$$','$$\omega_2$$','$$\omega_3$$','$$\omega_4$$'};
 
-pdf_ts(q,'$$time [sec]$$','$$position\ [m]$$',"$$Desired Position$$",legend_vec_xyz,'pos_d.pdf');
-pdf_ts(dot_q,'$$time [sec]$$','$$velocity[m/s]$$',"$$Desried Velocity$$",legend_vec_xyz,'vel_d.pdf');
-pdf_ts(ddot_q,'$$time [sec]$$','$$acceleration[m/s^2]$$',"$$Desried Acceleration$$",legend_vec_xyz,'acc_d.pdf');
+pdf_ts(q,       '$$time [sec]$$','$$position\ [m]$$',"Desired Position",legend_vec_xyz,'pos_d.pdf');
+pdf_ts(dot_q,   '$$time [sec]$$','$$velocity\ [m/s]$$',"Desried Velocity",legend_vec_xyz,'vel_d.pdf');
+pdf_ts(ddot_q,  '$$time [sec]$$','$$acceleration\ [m/s^2]$$',"Desried Acceleration",legend_vec_xyz,'acc_d.pdf');
 
-pdf_ts(pos,'$$time [sec]$$','$$position [m]$$',"$$Position$$",legend_vec_xyz,'pos.pdf');
-pdf_ts(ori,'$$time [sec]$$','$$quaternion$$',"$$Orientation$$",legend_vec_quat,'ori.pdf');
-pdf_ts(vel,'$$time [sec]$$','$$velocity[m/s]$$',"$$Linear Velocity$$",legend_vec_xyz,'lin_vel.pdf');
-pdf_ts(ang_vel,'$$time [sec]$$','$$quaternion$$',"$$Angular Velocity$$",legend_vec_quat,'ang_vel.pdf');
+pdf_ts(pos,     '$$time [sec]$$','$$position\ [m]$$',"Position",legend_vec_xyz,'pos.pdf');
+pdf_ts(ori,     '$$time [sec]$$','$$quaternion$$',"Orientation",legend_vec_quat,'ori.pdf');
+pdf_ts(vel,     '$$time [sec]$$','$$velocity\ [m/s]$$',"Linear Velocity",legend_vec_xyz,'lin_vel.pdf');
+pdf_ts(ang_vel, '$$time [sec]$$','$$quaternion$$',"Angular Velocity",legend_vec_quat,'ang_vel.pdf');
 
-pdf_ts(err_p,'$$time [sec]$$','$$error pos [m]$$',"$$Error P$$",legend_vec_xyz,'err_p.pdf');
-pdf_ts(err_v,'$$time [sec]$$','$$error vel [m/s]$$',"$$Error V$$",legend_vec_xyz,'err_v.pdf');
-pdf_ts(err_R,'$$time [sec]$$','$$error rot [rad]$$',"$$Error R$$",legend_vec_xyz,'err_r.pdf');
-pdf_ts(err_W,'$$time [sec]$$','$$error ang vel [rad/s]$$',"$$Error W$$",legend_vec_xyz,'err_w.pdf');
+pdf_ts(err_p,   '$$time [sec]$$','$$error\ pos\ [m]$$',"Error P",legend_vec_xyz,'err_p.pdf');
+pdf_ts(err_v,   '$$time [sec]$$','$$error\ vel\ [m/s]$$',"Error V",legend_vec_xyz,'err_v.pdf');
+pdf_ts(err_R,   '$$time [sec]$$','$$error\ rot\ [rad]$$',"Error R",legend_vec_xyz,'err_r.pdf');
+pdf_ts(err_W,   '$$time [sec]$$','$$error\ ang\ vel\ [rad/s]$$',"Error W",legend_vec_xyz,'err_w.pdf');
 
-pdf_ts(tau_b, '$$time [sec]$$', '$$command torque$$', '$$Command Torque \tau_{b}$$', legend_vec_rpy,'tau_b.pdf')
-pdf_ts(u_T, '$$time [sec]$$', '$$command thrust$$', '$$Commanded Thrust u_{T}$$', '$$u_{T}$$','u_T.pdf')
-pdf_ts(read_speed,'$$time [sec]$$','$$motor speed [rpm]$$', '$$Read Motor Speed$$', {'m0','m1','m2','m3'},'read_speed.pdf');
-pdf_ts(comm_speed,'$$time [sec]$$','$$motor speed [rpm]$$', '$$Commanded Motor Speed$$', {'m0','m1','m2','m3'},'comm_speed.pdf');
+pdf_ts(tau_b,   '$$time [sec]$$', '$$command\ torque$$', 'Command Torque $$\tau_{b}$$', legend_vec_rpy,'tau_b.pdf')
+pdf_ts(u_T,     '$$time [sec]$$', '$$command\ thrust$$', 'Commanded Thrust $$u_{T}$$', '$$u_{T}$$','u_T.pdf')
+pdf_ts(read_speed,'$$time [sec]$$','$$motor\ speed\ [rpm]$$', 'Read Motor Speed', legend_vec_motor,'read_speed.pdf');
+pdf_ts(comm_speed,'$$time [sec]$$','$$motor\ speed\ [rpm]$$', 'Commanded Motor Speed', legend_vec_motor,'comm_speed.pdf');
 
-pdf_ts(F,'$$time [sec]$$','$$F_{tot}$$',"$$APF Total Force$$",legend_vec_xyz,'f_tot.pdf')
-pdf_ts(F_rep,'$$time [sec]$$','$$F_{rep}$$',"$$APF Repulsive Force$$",legend_vec_xyz,'f_rep.pdf')
+pdf_ts(F,       '$$time [sec]$$','$$F_{tot}$$',"APF Total Force",legend_vec_xyz,'f_tot.pdf')
+pdf_ts(F_rep,   '$$time [sec]$$','$$F_{rep}$$',"APF Repulsive Force",legend_vec_xyz,'f_rep.pdf')
 
 

@@ -10,7 +10,7 @@ function h = pdf_ts(y, x_label, y_label, title_str, legend_vec, pdf_name)
     removeToolbarExplorationButtons(h)
 
     x = y.Time;
-    plot(y, 'Linewidth', lw);
+    plot(x,y.Data, 'Linewidth', lw);
     xlim([x(1) x(end)])
     xlim([371.0520 423.9380])
 
@@ -18,7 +18,7 @@ function h = pdf_ts(y, x_label, y_label, title_str, legend_vec, pdf_name)
     ylabel(y_label)
 
     set(gcf,'color','w');
-    set(gca, 'FontSize',12);
+    set(gca, 'FontSize',16);
     grid on
     box on
     legend(legend_vec)
