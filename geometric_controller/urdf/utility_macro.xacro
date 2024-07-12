@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot name="utility_macro" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--All units in m-kg-s-radians unit system -->
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+  <xacro:property name="M_PI_2" value="1.570796327" />
+  <xacro:property name="DEG_TO_RAD" value="0.017453293" />
+
+	<!--Material Definition-->  
+	<material name="Black">
+	  <color rgba="0.0 0.0 0.0 1.0"/>
+	</material>
+
+  <material name="Red">
+  	<color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+
+  <xacro:macro name="cylinder_inertia" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+              izz="${m*r*r/2}" /> 
+  </xacro:macro>
+
+  
+</robot>
+

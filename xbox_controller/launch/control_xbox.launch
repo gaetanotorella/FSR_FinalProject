@@ -1,0 +1,9 @@
+<launch>
+
+    <param name="joy_node/dev" value="/dev/input/js1"/>
+
+    <node pkg="joy" type="joy_node" name="joy_node" output="screen" />
+    <node pkg="xbox_controller" type="robot_controller" name="robot_controller" output="screen" />
+
+
+</launch>

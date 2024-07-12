@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<robot name="ardrone" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find geometric_controller)/urdf/component_snippets.xacro" />
+  <!-- Instantiate ardrone "mechanics" -->
+  <xacro:include filename="$(find geometric_controller)/urdf/ardrone.xacro" />
+
+  <!-- Instantiate a controller. -->
+  <xacro:controller_plugin_macro namespace="${namespace}" imu_sub_topic="imu" />
+
+  <xacro:if value="$(arg enable_mavlink_interface)">
+    <!-- Instantiate mavlink telemetry interface. -->
+    <xacro:default_mavlink_interface namespace="${namespace}" imu_sub_topic="imu" rotor_count="4" />
+  </xacro:if>
+
+  <!-- Mount an ADIS16448 IMU. -->
+  <xacro:default_imu namespace="${namespace}" parent_link="${namespace}/base_link" />
+
+  <xacro:if value="$(arg enable_ground_truth)">
+    <xacro:ground_truth_imu_and_odometry namespace="${namespace}" parent_link="${namespace}/base_link" />
+  </xacro:if>
+
+  <xacro:if value="$(arg enable_logging)">
+    <!-- Instantiate a logger -->
+    <xacro:bag_plugin_macro
+      namespace="${namespace}"
+      bag_file="$(arg log_file)"
+      rotor_velocity_slowdown_sim="${rotor_velocity_slowdown_sim}"
+      wait_to_record_bag="$(arg wait_to_record_bag)" />
+  </xacro:if>
+
+<!-- LIDAR AGGIUNTO -->
+
+  <xacro:include filename="$(find geometric_controller)/urdf/lidar_gazebo_macro.xacro" />
+
+  <link name="${namespace}/lidar_link">
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="${namespace}/base_link"/>
+    <child link="${namespace}/lidar_link"/>
+    <origin rpy="${M_PI} 0 0" xyz="0.0 0.0 -0.0145"/>
+    <!-- <origin rpy="${M_PI} 0 0" xyz="0.0 0.0 -0.04"/> -->
+  </joint>
+
+  <xacro:lidar_gazebo_sensor parent="${namespace}/lidar_link" />
+
+
+<!-- CAMERA POSTERIORE AGGIUNTA -->
+
+<!-- camera fissa -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="${namespace}/base_link"/>
+    <child link="${namespace}/camera_link"/>
+    <origin xyz="-0.7 0 0.4" rpy="0.0 0.3 0.0"/>
+  </joint>
+
+<!-- camera rotante -->
+  <!-- <joint name="${namespace}/camera_joint" type="revolute">
+    <parent link="${namespace}/base_link"/>
+    <child link="${namespace}/camera_link"/>
+    <origin xyz="-0.7 0 0.4" rpy="0.0 0.3 0.0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="1.0" velocity="1.0"/>
+  </joint> -->
+
+  <link name="${namespace}/camera_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.000000001"/>
+      <origin xyz="0 0 0"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+  </inertial>
+  </link>
+
+  <gazebo reference="${namespace}/camera_link">
+    <sensor type="camera" name="camera">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1280</width> <height>800</height> <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near> <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type> <mean>0.0</mean> <stddev>0.007</stddev>
+        </noise>
+      </camera>
+
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>${namespace}/camera_link</frameName>
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+</robot>
+

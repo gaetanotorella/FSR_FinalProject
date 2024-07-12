@@ -1,0 +1,6 @@
+<launch>
+  
+    <node name="outer_loop_apf" pkg="geometric_controller" type="outer_loop_apf" output="log"/>
+    <node name="inner_loop" pkg="geometric_controller" type="inner_loop" output="log"/>
+    
+</launch>
