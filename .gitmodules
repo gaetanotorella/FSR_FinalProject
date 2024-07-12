@@ -1,0 +1,9 @@
+[submodule "mav_comm"]
+	path = mav_comm
+	url = https://github.com/ethz-asl/mav_comm.git
+[submodule "octomap_ros"]
+	path = octomap_ros
+	url = https://github.com/OctoMap/octomap_ros.git
+[submodule "rotors_simulator"]
+	path = rotors_simulator
+	url = https://github.com/ntnu-arl/rotors_simulator.git
