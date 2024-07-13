@@ -2,11 +2,11 @@
 #include <algorithm>
 
 #define gamma 3
-#define d_0 2.5
+#define d_0 5.5
 #define k_att 0.5
 
 // #define k_rep 0.7   // v2.0
-#define k_rep 0.07  // v1.0
+#define k_rep 0.05  // v1.0
 
 geometry_msgs::Pose pose;
 geometry_msgs::Twist twist;
