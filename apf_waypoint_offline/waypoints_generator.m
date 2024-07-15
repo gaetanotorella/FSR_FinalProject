@@ -55,7 +55,6 @@ for k = 0:dt:t_end
 
     alpha = calculate_alpha(k);
     F = exp_mov_average(F_tot,alpha);
-    
 
     plot_F_a = [plot_F_a F_a];
     plot_F_rep = [plot_F_rep F_rep];
@@ -112,6 +111,14 @@ plot3(q_obstacles(1,i),q_obstacles(2,i),-q_obstacles(3,i),"*",'Color',"r",'Marke
 end
 axis on
 exportgraphics(fig_traj, "traj3d_d.pdf");
+
+%% gif
+for n = 0:1:90
+      view([n 19.491063829787073])
+      exportgraphics(gcf,'testAnimated.gif','Append',true);
+end
+
+set(gca, 'CameraPosition', [-20  -72   33]);
 
 
 %% PDF
