@@ -18,12 +18,11 @@ Eigen::Vector3d PoseToEigen(const geometry_msgs::Pose& pose) {
     return vec;
 }
 
-Eigen::Vector3d AngVelToEigen(const geometry_msgs::Vector3& ang_vel) {
+Eigen::Vector3d Vec3MsgToEigen(const geometry_msgs::Vector3& msg) {
     Eigen::Vector3d vec;
-    //todo
-    vec.x() = ang_vel.x;
-    vec.y() = ang_vel.y;
-    vec.z() = ang_vel.z;
+    vec.x() = msg.x;
+    vec.y() = msg.y;
+    vec.z() = msg.z;
     return vec;
 }
 

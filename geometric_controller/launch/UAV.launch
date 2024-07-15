@@ -63,13 +63,12 @@
   /ardrone/ground_truth/odometry
   /ardrone/geom_controller/apf
   /ardrone/geom_controller/F_rep
-  /ardrone/geom_controller/dist"/>
-
-
+  /ardrone/geom_controller/dist
+  /ardrone/momentum_estimator/f_e
+  /ardrone/momentum_estimator/tau_e"/>
 
   <!-- Esegui il comando rosbag record con i topic specificati -->
   <node pkg="rosbag" type="record" name="rosbag_record" output="screen" args="-O $(arg bag_directory)/$(arg bag_name) $(arg topics)"/>
-
 
   <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find geometric_controller)/ardrone.rviz" required="true" /> -->
 

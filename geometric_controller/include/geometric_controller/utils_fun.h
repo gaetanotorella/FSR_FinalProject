@@ -57,7 +57,7 @@ geometry_msgs::Vector3 EigenToVector3 (const Eigen::Vector3d& vec);
 
 Eigen::Vector3d PoseToEigen(const geometry_msgs::Pose& pose);
 
-Eigen::Vector3d AngVelToEigen(const geometry_msgs::Vector3& ang_vel);
+Eigen::Vector3d Vec3MsgToEigen(const geometry_msgs::Vector3& ang_vel);
 
 Eigen::Vector3d TwistLinearToEigen(const geometry_msgs::Twist& twist);
 

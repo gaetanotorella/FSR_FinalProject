@@ -1,6 +1,0 @@
-<launch>
-  
-    <node name="outer_loop" pkg="geometric_controller" type="outer_loop" output="log"/>
-    <node name="inner_loop" pkg="geometric_controller" type="inner_loop" output="log"/>
-
-</launch>

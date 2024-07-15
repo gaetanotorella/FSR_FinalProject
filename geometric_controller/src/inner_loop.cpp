@@ -320,7 +320,7 @@ Eigen::Vector3d compute_dot_omega_bb_des(Vector3d prev, double Ts){
 
 void imuCallback(const sensor_msgs::Imu& msg) {
 
-    ang_vel = AngVelToEigen(msg.angular_velocity);
+    ang_vel = Vec3MsgToEigen(msg.angular_velocity);
     Rb = (quaternionToRotation(msg.orientation));
     Rb = enuToNed(Rb);
 

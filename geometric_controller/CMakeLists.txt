@@ -90,6 +90,9 @@ add_executable(APF_method_online src/APF_method_online.cpp)
 target_link_libraries(APF_method_online geometric_controller ${catkin_LIBRARIES})
 add_dependencies(APF_method_online ${catkin_EXPORTED_TARGETS})
 
+add_executable(momentum_estimator src/momentum_estimator.cpp)
+target_link_libraries(momentum_estimator geometric_controller ${catkin_LIBRARIES})
+add_dependencies(momentum_estimator ${catkin_EXPORTED_TARGETS})
 
 
 foreach(dir launch models resource worlds)

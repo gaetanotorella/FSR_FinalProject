@@ -113,6 +113,22 @@
       </plugin>
     </sensor>
   </gazebo>
+
+<!-- WIND PLUGIN ROTORS SIMULATOR -->
+  <!-- <xacro:wind_plugin_macro
+    namespace="${namespace}"
+    xyz_offset="0 0 0"
+    wind_direction="1 0 0"
+    wind_force_mean="0.0"
+    wind_gust_direction="1 0 0"
+    wind_gust_duration="20.0"
+    wind_gust_start="60.0"
+    wind_gust_force_mean="10.0"
+    wind_speed_mean="0.7"
+    use_custom_static_wind_field="true"
+    custom_wind_field_path="$(find rotors_gazebo)/models/hemicyl/wind_field_hemicyl.txt">
+  </xacro:wind_plugin_macro> -->
   
+
 </robot>
 
