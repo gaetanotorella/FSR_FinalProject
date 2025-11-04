@@ -1,5 +1,3 @@
-
-https://github.com/user-attachments/assets/a26538d9-80c8-4a09-b51c-526bc210b066
 # Geometric Controller with APF method for UAV
 
 This project presents a geometric controller to manage the position and attitude of an Unmanned Aerial Vehicle (UAV). 
